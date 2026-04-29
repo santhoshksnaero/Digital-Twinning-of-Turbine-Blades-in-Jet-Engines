@@ -1,20 +1,10 @@
 #!/bin/sh
-cd "${0%/*}" || exit                                # Run from this directory
-. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions        # Tutorial run functions
-#------------------------------------------------------------------------------
+# Clear old stuff
+rm -rf [1-9]* constant/polyMesh
 
-runApplication ./Allrun.pre
+# Run the chain
+blockMesh > log.blockMesh 2>&1
+snappyHexMesh -overwrite > log.snappyHexMesh 2>&1
+simpleFoam > log.simpleFoam 2>&1
 
-#-- Run on single processor
-#runApplication $(getApplication)
-
-# Decompose
-runApplication decomposePar -allRegions
-
-# Run
-runParallel $(getApplication)
-
-# Reconstruct
-runApplication reconstructPar -allRegions
-
-#------------------------------------------------------------------------------
+echo "Simulation complete. Check log.simpleFoam for results."
