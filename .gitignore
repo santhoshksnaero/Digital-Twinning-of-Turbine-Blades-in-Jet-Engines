@@ -1,24 +1,15 @@
-# (Paste the .gitignore content, then Ctrl+O, Enter, Ctrl+X)
-git add .
-git commit -m "Initial structure: Native Linux Filesystem setup"
-# === OpenFOAM Exclusions ===
-[0-9]*
-![0]/
-constant/polyMesh/
-platforms/
+# Ignore result folders (time steps)
+[1-9]*
+0.*
 postProcessing/
-*.foam
+
+# Ignore the mesh (we rebuild this with scripts)
+constant/polyMesh/
+
+# Ignore log files
 log.*
 
-# === Python & Machine Learning ===
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-
-# Large Data Files
-*.csv
-*.npy
-*.npz
-models/*.pt
-models/*.h5
+# Keep the base setup
+!0/
+!constant/
+!system/
