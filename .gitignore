@@ -1,0 +1,24 @@
+# (Paste the .gitignore content, then Ctrl+O, Enter, Ctrl+X)
+git add .
+git commit -m "Initial structure: Native Linux Filesystem setup"
+# === OpenFOAM Exclusions ===
+[0-9]*
+![0]/
+constant/polyMesh/
+platforms/
+postProcessing/
+*.foam
+log.*
+
+# === Python & Machine Learning ===
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Large Data Files
+*.csv
+*.npy
+*.npz
+models/*.pt
+models/*.h5
