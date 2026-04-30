@@ -1,0 +1,50 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  www.openfoam.com
+    \\  /    A nd           | Version:  v2012
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      omega;
+}
+//---------------------------------------------------------------------------//
+
+dimensions      [0 0 -1 0 0 0 0];
+internalField   uniform 3.39;
+
+boundaryField
+    {
+        inlet
+        {
+            type            fixedValue;
+            value           $internalField;
+        }
+        outlet
+        {
+            type            zeroGradient;
+        }
+        
+        // The turbine blade itself
+        blade_surface
+        {
+            type            omegaWallFunction;
+            value           $internalField;
+        }
+
+        // The top/bottom domain boundaries
+        walls
+        {
+            type            omegaWallFunction;
+            value           $internalField;
+        }
+
+        frontAndBack { type empty; }
+        upperWall { type zeroGradient; }
+        lowerWall { type zeroGradient; }
+    }

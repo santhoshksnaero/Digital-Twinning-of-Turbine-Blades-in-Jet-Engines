@@ -1,6 +1,9 @@
 /*--------------------------------*- C++ -*----------------------------------*\
-  =========                 |
-  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2012                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
@@ -9,13 +12,35 @@ FoamFile
     class       volVectorField;
     object      U;
 }
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
 dimensions      [0 1 -1 0 0 0 0];
-internalField   uniform (10 0 0);
+
+internalField   uniform (0.01 0 0);
+
 boundaryField
-{
-    inlet           { type fixedValue; value uniform (10 0 0); }
-    outlet          { type zeroGradient; }
-    walls           { type noSlip; }
-    frontAndBack    { type empty; }
-    blade_surface   { type noSlip; }
-}
+    {
+        inlet
+        {
+            type            fixedValue;
+            value           uniform (10 0 0); // Adjust (10 0 0) to your air speed
+        }
+        outlet
+        {
+            type            zeroGradient;
+        }
+        blade_surface
+        {
+            type            noSlip;
+        }
+        walls
+        {
+            type            noSlip;
+        }
+        frontAndBack
+        {
+            type            empty;
+        }
+        // ... ensure upperWall and lowerWall are also defined correctly (e.g., slip)
+    }
+// ************************************************************************* //

@@ -1,0 +1,24 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      nut;
+}
+dimensions      [0 2 -1 0 0 0 0];
+internalField   uniform 0;
+boundaryField
+    {
+        inlet { type calculated; value $internalField; }
+        outlet { type calculated; value $internalField; }
+        
+        // This is the turbine blade
+        blade_surface { type nutkWallFunction; value $internalField; } 
+        
+        // This is the top/bottom domain boundary
+        walls { type nutkWallFunction; value $internalField; } 
+
+        frontAndBack { type empty; }
+        upperWall { type calculated; value $internalField; }
+        lowerWall { type calculated; value $internalField; }
+    }
