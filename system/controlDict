@@ -9,6 +9,8 @@ FoamFile
     class       dictionary;
     object      controlDict;
 }
+libs ( "libfieldFunctionObjects.so" "libcompressibleTurbulenceModels.so" );
+
 functions
 {
     forces1
